@@ -1,28 +1,143 @@
-.container {
-    width: 100%;
-    overflow: hidden;
+.photo-slider-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 50%, #F8F9FA 100%);
     position: relative;
-    background-color: #FFFFFF; /* White background */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.photo-slider-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(26,44,91,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    pointer-events: none;
+    z-index: 1;
+}
+
+.container-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    border-radius: 2px;
+}
+
+.section-header h2 {
+    font-size: 3em;
+    color: #1A2C5B;
+    margin-bottom: 20px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #1A2C5B 0%, #2A3F6B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-header p {
+    font-size: 1.2em;
+    color: #6C757D;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.photo-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    background: #FFFFFF;
 }
 
 .slider {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 
 .slide {
     min-width: 100%;
-    transition: opacity 0.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 .slide img {
     width: 100%;
-    height: auto;
+    height: 500px;
+    object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
 }
 
+.slide.active img {
+    transform: scale(1.02);
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(26, 44, 91, 0.9));
+    color: #FFFFFF;
+    padding: 40px 30px 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+
+.slide.active .slide-caption {
+    transform: translateY(0);
+}
+
+/* Play/Pause Indicator */
+.play-pause-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(26, 44, 91, 0.8);
+    color: #FFFFFF;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 15;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.photo-slider-container:hover .play-pause-indicator {
+    transform: scale(1.1);
+    background: rgba(26, 44, 91, 0.9);
+}
+
+/* Navigation Buttons */
 .navigation {
     position: absolute;
     top: 50%;
@@ -30,33 +145,241 @@
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
+    padding: 0 20px;
+    pointer-events: none;
+    z-index: 10;
 }
 
-.prev, .next {
-    background-color: #FFD700; /* Yellow accent for navigation buttons */
+.nav-btn {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
     border: none;
-    padding: 12px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
     border-radius: 50%;
-    color: #1A2C5B; /* Deep blue text */
+    color: #1A2C5B;
     font-weight: bold;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
 }
 
-.prev:hover, .next:hover {
-    background-color: #FDCB6E; /* Slightly different yellow on hover */
+.nav-btn:hover {
+    background: linear-gradient(135deg, #FDCB6E 0%, #FF8C00 100%);
     transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+    opacity: 1;
 }
 
-/* Photo slider caption styling */
-.slide-caption {
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.nav-btn span {
+    line-height: 1;
+    transform: translateY(-1px);
+}
+
+/* Slide Indicators */
+.slide-indicators {
     position: absolute;
     bottom: 20px;
-    left: 20px;
-    background-color: rgba(26, 44, 91, 0.8); /* Semi-transparent deep blue */
-    color: #FFFFFF; /* White text */
-    padding: 10px 15px;
-    border-radius: 4px;
-    font-size: 0.9em;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: #FFD700;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease;
+}
+
+.indicator.active {
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.indicator.active::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.indicator:hover {
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .photo-slider-section {
+        padding: 80px 0;
+    }
+    
+    .section-header h2 {
+        font-size: 2.5em;
+    }
+    
+    .slide img {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .photo-slider-section {
+        padding: 60px 0;
+    }
+    
+    .container-wrapper {
+        padding: 0 15px;
+    }
+    
+    .section-header h2 {
+        font-size: 2em;
+    }
+    
+    .section-header p {
+        font-size: 1.1em;
+        padding: 0 20px;
+    }
+    
+    .slide img {
+        height: 300px;
+    }
+    
+    .slide-caption {
+        padding: 25px 20px 15px;
+        font-size: 1em;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .navigation {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .photo-slider-section {
+        padding: 50px 0;
+    }
+    
+    .section-header {
+        margin-bottom: 40px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8em;
+    }
+    
+    .photo-slider-container {
+        border-radius: 15px;
+    }
+    
+    .slide img {
+        height: 250px;
+    }
+    
+    .slide-caption {
+        padding: 20px 15px 12px;
+        font-size: 0.9em;
+    }
+    
+    .nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+    
+    .navigation {
+        padding: 0 10px;
+    }
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .indicator::before {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .slide-indicators {
+        gap: 8px;
+        bottom: 15px;
+    }
+}
+
+/* Animation for slide entrance */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide.active {
+    animation: slideIn 0.6s ease-out;
+}
+
+/* Infinite scroll performance optimization */
+.slider {
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.slide {
+    backface-visibility: hidden;
+}
+
+/* Enhanced mobile responsiveness for infinite slider */
+@media screen and (max-width: 768px) {
+    .play-pause-indicator {
+        top: 15px;
+        right: 15px;
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .play-pause-indicator {
+        top: 10px;
+        right: 10px;
+        padding: 5px 8px;
+        font-size: 11px;
+    }
 }
