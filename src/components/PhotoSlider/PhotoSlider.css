@@ -1,0 +1,62 @@
+.container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: #FFFFFF; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.prev, .next {
+    background-color: #FFD700; /* Yellow accent for navigation buttons */
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    color: #1A2C5B; /* Deep blue text */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.prev:hover, .next:hover {
+    background-color: #FDCB6E; /* Slightly different yellow on hover */
+    transform: scale(1.1);
+}
+
+/* Photo slider caption styling */
+.slide-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(26, 44, 91, 0.8); /* Semi-transparent deep blue */
+    color: #FFFFFF; /* White text */
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}

@@ -1,0 +1,27 @@
+.ngo-website/src/components/About/About.css
+
+.about {
+    padding: 20px;
+    background-color: #1A2C5B; /* Deep Blue background for key sections */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #FFFFFF; /* White text on deep blue background */
+}
+
+.about p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #FFFFFF; /* White text for readability */
+}
+
+.about img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+}

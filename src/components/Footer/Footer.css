@@ -1,0 +1,225 @@
+.footer {
+    background-color: #1A2C5B; /* Deep Blue background */
+    color: #FFFFFF; /* White text */
+    padding: 40px 0 0 0;
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.footer-content {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: #FFFFFF;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-section h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    color: #FFFFFF;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Logo Section */
+.footer-logo-section {
+    text-align: left;
+}
+
+.footer-logo {
+    width: 60px;
+    height: auto;
+    margin-bottom: 15px;
+    /* Make logo white by inverting colors */
+    filter: invert(1) brightness(1);
+}
+
+/* Footer Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 2px 0;
+}
+
+.footer-links a:hover {
+    color: #FFD700; /* Yellow accent on hover */
+    transform: translateX(5px);
+}
+
+.cta-link {
+    background-color: #FFD700;
+    color: #1A2C5B !important;
+    padding: 6px 12px !important;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cta-link:hover {
+    background-color: #FDCB6E;
+    transform: translateX(0) scale(1.05) !important;
+}
+
+/* Contact Info */
+.contact-info p {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.contact-info .icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background-color: #FFD700;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-legal-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-legal-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-legal-links a:hover {
+    color: #FFD700;
+}
+
+.separator {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .footer-top {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 30px;
+    }
+    
+    .footer-logo-section {
+        grid-column: 1 / -1;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-info p {
+        justify-content: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer-logo-section {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    
+    .footer-content {
+        padding: 0 15px;
+    }
+    
+    .footer {
+        padding: 30px 0 0 0;
+    }
+}

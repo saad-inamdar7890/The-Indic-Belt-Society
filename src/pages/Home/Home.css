@@ -1,0 +1,50 @@
+.home {
+    min-height: 100vh;
+    background-color: #FFFFFF; /* White background */
+}
+
+/* Header styling */
+.home .header {
+    background-color: #FFFFFF; /* White background for header */
+    color: #1A2C5B; /* Deep blue text */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Section styling */
+.home .about {
+    background-color: #1A2C5B; /* Deep Blue for key sections */
+    color: #FFFFFF; /* White text */
+    padding: 80px 0;
+}
+
+.home .events-section {
+    background-color: #F8F9FA; /* Light grey alternate background */
+}
+
+.home .publications-section {
+    background-color: #F8F9FA; /* Light grey background */
+}
+
+.home .photo-slider {
+    padding: 80px 0;
+    background-color: #FFFFFF; /* White background */
+}
+
+.home .footer {
+    background-color: #1A2C5B; /* Deep Blue background */
+    color: #FFFFFF; /* White text */
+    margin-top: 0;
+}
+
+/* Ensure smooth transitions between sections */
+.home > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Add subtle spacing between sections */
+.home > section:not(:last-child) {
+    border-bottom: 1px solid rgba(248, 249, 250, 0.5);
+}

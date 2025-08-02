@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    color: #6C757D;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
+    color: #1A2C5B;
+}
+
+h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    color: #6C757D;
+}
+
+a {
+    text-decoration: none;
+    color: #1A2C5B;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Call-to-Action Button Styles */
+.cta-button {
+    background-color: #FFD700; /* Yellow for CTA buttons */
+    color: #1A2C5B; /* Deep blue text */
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+    background-color: #FDCB6E; /* Slightly different yellow on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Statistics/Key Figures Styling */
+.key-stat {
+    color: #FFD700; /* Yellow for highlighting statistics */
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Form Input Styling */
+.form-input {
+    background-color: #F8F9FA; /* Light grey for input fields */
+    border: 1px solid #6C757D;
+    padding: 10px;
+    border-radius: 4px;
+    color: #6C757D;
+    font-size: 14px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #1A2C5B;
+    box-shadow: 0 0 0 2px rgba(26, 44, 91, 0.1);
+}
+
+/* Content Card Styling */
+.content-card {
+    background-color: #FFFFFF; /* White card background */
+    border: 1px solid #F8F9FA;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Alternate Section Background */
+.alternate-section {
+    background-color: #F8F9FA; /* Light grey for visual breaks */
+    padding: 40px 0;
+}
+
+/* Divider/Border Styling */
+.section-divider {
+    border-top: 2px solid #6C757D; /* Medium grey borders */
+    margin: 30px 0;
+}
