@@ -5,73 +5,49 @@ const PhotoSlider = () => {
     const photos = [
         { 
             id: 1, 
-            src: '/p1.jpg', 
+            src: 'p1.jpg', 
             alt: 'Cultural Heritage Event',
             caption: 'Annual Cultural Heritage Conference 2024'
         },
         { 
             id: 2, 
-            src: '/p2.jpg', 
+            src: 'p2.jpg', 
             alt: 'Academic Research Symposium',
             caption: 'International Research Symposium on Indic Studies'
         },
         { 
             id: 3, 
-            src: '/p3.jpg', 
+            src: 'p3.jpg', 
+            alt: 'Community Outreach Program',
+            caption: 'Community Engagement and Educational Outreach'
+        },
+        { 
+            id: 4, 
+            src: 'p4.jpg', 
+            alt: 'Community Outreach Program',
+            caption: 'Community Engagement and Educational Outreach'
+        },        { 
+            id: 5, 
+            src: 'p5.jpg', 
             alt: 'Community Outreach Program',
             caption: 'Community Engagement and Educational Outreach'
         },
     ];
 
-    const [currentSlide, setCurrentSlide] = useState(1); // Start from 1 (first real slide)
-    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0); // Start from 0
     const [isPaused, setIsPaused] = useState(false);
-    const sliderRef = useRef(null);
-
-    // Create infinite loop by duplicating first and last slides
-    const infinitePhotos = [
-        photos[photos.length - 1], // Last slide at the beginning
-        ...photos,
-        photos[0] // First slide at the end
-    ];
 
     const nextSlide = () => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
-        setCurrentSlide(prev => prev + 1);
+        setCurrentSlide(prev => (prev + 1) % photos.length);
     };
 
     const prevSlide = () => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
-        setCurrentSlide(prev => prev - 1);
+        setCurrentSlide(prev => (prev - 1 + photos.length) % photos.length);
     };
 
     const goToSlide = (index) => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
-        setCurrentSlide(index + 1); // +1 because of the duplicate slide at the beginning
+        setCurrentSlide(index);
     };
-
-    // Handle infinite loop transitions
-    useEffect(() => {
-        if (isTransitioning) {
-            const timer = setTimeout(() => {
-                setIsTransitioning(false);
-                
-                // If we're at the duplicate last slide, jump to the real last slide
-                if (currentSlide === 0) {
-                    setCurrentSlide(photos.length);
-                }
-                // If we're at the duplicate first slide, jump to the real first slide
-                else if (currentSlide === photos.length + 1) {
-                    setCurrentSlide(1);
-                }
-            }, 600); // Match the CSS transition duration
-
-            return () => clearTimeout(timer);
-        }
-    }, [currentSlide, isTransitioning, photos.length]);
 
     // Auto-play functionality
     useEffect(() => {
@@ -81,16 +57,23 @@ const PhotoSlider = () => {
             }, 3000); // Change slide every 3 seconds
             return () => clearInterval(interval);
         }
-    }, [isPaused, isTransitioning]);
+    }, [isPaused]);
 
     const handleMouseEnter = () => setIsPaused(true);
     const handleMouseLeave = () => setIsPaused(false);
 
-    // Get the real slide index for indicators
-    const getRealSlideIndex = () => {
-        if (currentSlide === 0) return photos.length - 1;
-        if (currentSlide === photos.length + 1) return 0;
-        return currentSlide - 1;
+    // Get visible slides (3 at a time: previous, current, next)
+    const getVisibleSlides = () => {
+        const slides = [];
+        for (let i = -1; i <= 1; i++) {
+            const index = (currentSlide + i + photos.length) % photos.length;
+            slides.push({
+                ...photos[index],
+                position: i, // -1 (left), 0 (center), 1 (right)
+                originalIndex: index
+            });
+        }
+        return slides;
     };
 
     return (
@@ -106,22 +89,26 @@ const PhotoSlider = () => {
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
-                    <div 
-                        ref={sliderRef}
-                        className="slider" 
-                        style={{ 
-                            transform: `translateX(-${currentSlide * 100}%)`,
-                            transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none'
-                        }}
-                    >
-                        {infinitePhotos.map((photo, index) => (
-                            <div key={`${photo.id}-${index}`} className={`slide ${index === currentSlide ? 'active' : ''}`}>
-                                <img src={photo.src} alt={photo.alt} />
-                                <div className="slide-caption">
-                                    {photo.caption}
+                    <div className="slider">
+                        {getVisibleSlides().map((slide) => {
+                            const isCenter = slide.position === 0;
+                            const isLeft = slide.position === -1;
+                            const isRight = slide.position === 1;
+                            
+                            return (
+                                <div 
+                                    key={`${slide.id}-${slide.position}`} 
+                                    className={`slide ${isCenter ? 'center' : ''} ${isLeft ? 'left' : ''} ${isRight ? 'right' : ''}`}
+                                >
+                                    <img src={slide.src} alt={slide.alt} />
+                                    {isCenter && (
+                                        <div className="slide-caption">
+                                            {slide.caption}
+                                        </div>
+                                    )}
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                     
                     {/* Navigation Arrows */}
@@ -139,7 +126,7 @@ const PhotoSlider = () => {
                         {photos.map((_, index) => (
                             <button
                                 key={index}
-                                className={`indicator ${index === getRealSlideIndex() ? 'active' : ''}`}
+                                className={`indicator ${index === currentSlide ? 'active' : ''}`}
                                 onClick={() => goToSlide(index)}
                                 aria-label={`Go to slide ${index + 1}`}
                             />
