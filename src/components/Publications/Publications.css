@@ -1,12 +1,6 @@
-.what-we-do-section {
+.publications-section {
     padding: 80px 0;
     background-color: #F8F9FA; /* Light grey background for subtle depth */
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 .section-header {
@@ -49,14 +43,14 @@
     transform: translateY(-2px);
 }
 
-.focus-areas-grid {
+.publications-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 30px;
     margin-bottom: 50px;
 }
 
-.focus-area-card {
+.publication-card {
     background-color: #FFFFFF; /* White card backgrounds */
     border-radius: 12px;
     overflow: hidden;
@@ -65,12 +59,12 @@
     border: 1px solid #F8F9FA; /* Light grey borders */
 }
 
-.focus-area-card:hover {
+.publication-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-.area-image {
+.publication-image {
     position: relative;
     height: 200px;
     overflow: hidden;
@@ -80,35 +74,18 @@
     justify-content: center;
 }
 
-.area-image img {
+.publication-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
-    opacity: 0.3;
 }
 
-.focus-area-card:hover .area-image img {
+.publication-card:hover .publication-image img {
     transform: scale(1.05);
 }
 
-.area-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 4em;
-    filter: drop-shadow(0 4px 15px rgba(255, 215, 0, 0.3));
-    transition: all 0.3s ease;
-    z-index: 2;
-}
-
-.focus-area-card:hover .area-icon {
-    transform: translate(-50%, -50%) scale(1.1);
-    filter: drop-shadow(0 6px 20px rgba(255, 215, 0, 0.5));
-}
-
-.area-type {
+.publication-type {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -120,14 +97,13 @@
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    z-index: 2;
 }
 
-.area-content {
+.publication-content {
     padding: 25px;
 }
 
-.area-meta {
+.publication-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -135,7 +111,7 @@
     font-size: 0.9em;
 }
 
-.area-category {
+.publication-category {
     background-color: rgba(26, 44, 91, 0.1);
     color: #1A2C5B;
     padding: 4px 12px;
@@ -144,26 +120,41 @@
     font-size: 0.85em;
 }
 
-.area-number {
-    color: #6C757D; /* Medium grey for numbers */
+.publication-date {
+    color: #6C757D; /* Medium grey for dates */
     font-weight: 500;
 }
 
-.area-title {
+.publication-title {
     font-size: 1.3em;
     color: #1A2C5B; /* Deep blue for titles */
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: bold;
     line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.area-description {
+.publication-author {
+    color: #FFD700; /* Yellow for highlighting author */
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 0.95em;
+}
+
+.publication-summary {
     color: #6C757D; /* Medium grey for body text */
     line-height: 1.6;
     margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.area-link {
+.read-more-link {
     color: #1A2C5B; /* Deep blue for links */
     text-decoration: none;
     font-weight: bold;
@@ -175,13 +166,13 @@
     background-color: rgba(26, 44, 91, 0.05);
 }
 
-.area-link:hover {
+.read-more-link:hover {
     color: #FFD700; /* Yellow accent on hover */
     background-color: #1A2C5B;
     transform: translateX(5px);
 }
 
-.what-we-do-footer {
+.publications-footer {
     text-align: center;
     margin-top: 40px;
 }
@@ -206,11 +197,11 @@
 
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
-    .what-we-do-section {
+    .publications-section {
         padding: 60px 0;
     }
     
-    .focus-areas-grid {
+    .publications-grid {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 25px;
     }
@@ -231,30 +222,26 @@
         font-size: 13px;
     }
     
-    .focus-areas-grid {
+    .publications-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
     
-    .focus-area-card {
+    .publication-card {
         margin: 0 10px;
     }
     
-    .area-content {
+    .publication-content {
         padding: 20px;
     }
     
-    .area-title {
+    .publication-title {
         font-size: 1.2em;
-    }
-    
-    .area-icon {
-        font-size: 3.5em;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .what-we-do-section {
+    .publications-section {
         padding: 50px 0;
     }
     
@@ -277,22 +264,18 @@
         text-align: center;
     }
     
-    .area-image {
+    .publication-image {
         height: 150px;
     }
     
-    .area-content {
+    .publication-content {
         padding: 15px;
     }
     
-    .area-meta {
+    .publication-meta {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-    }
-    
-    .area-icon {
-        font-size: 3em;
     }
     
     .cta-button {

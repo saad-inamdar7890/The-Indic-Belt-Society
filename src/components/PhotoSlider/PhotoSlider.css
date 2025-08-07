@@ -1,5 +1,5 @@
 .photo-slider-section {
-    padding: 120px 0;
+    padding: 50px 0;
     background: #0a0a0a;
     position: relative;
     overflow: hidden;
@@ -32,95 +32,280 @@
     position: relative;
 }
 
-.section-header::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, #FFD700, #FFA500);
-    border-radius: 1px;
+.text-f-14-w {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
-.section-header h2 {
+.divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+}
+
+.left-margin {
+    margin-left: 20px;
+}
+
+.text-f-14 {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 20px;
+    font-weight: 300;
+}
+
+.heading {
     font-size: 4rem;
     color: #FFFFFF;
-    margin-bottom: 20px;
+    margin: 0;
     font-weight: 300;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-.section-header p {
-    font-size: 1.1em;
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-    font-weight: 300;
+.slider {
+    position: relative;
+    overflow: visible; /* Changed from hidden to visible */
+    padding: 0 80px; /* Add padding to ensure arrows are visible */
 }
 
-.photo-slider-container {
+/* Swiper Container - Main slider */
+.swiper.first-swiper {
     position: relative;
+    display: flex;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
     height: 600px;
-    overflow: hidden;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: visible;
     background: transparent;
     perspective: 1000px;
 }
 
-.slider {
-    position: relative;
+/* Carousel Arrows Container */
+.carousel-arrows {
+    position: absolute;
+    display: flex;
     width: 100%;
     height: 100%;
+    overflow: visible;
+    z-index: 4;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
+.carousel-arrow-w {
+    pointer-events: auto;
+    position: relative;
+    z-index: 5;
+}
+
+.carousel-arrow-w.arrow-previous {
+    margin-left: 0;
+}
+
+.carousel-arrow-w.arrow-next {
+    margin-right: 0;
+}
+
+.carousel-arrow {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 6;
+}
+
+.carousel-arrow:hover {
+    transform: scale(1.1);
+}
+
+.carousel-arrow-icon {
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 300;
+    z-index: 7;
+    position: relative;
+    line-height: 1;
+    user-select: none;
+}
+
+.carousel-arrow-oval {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.carousel-arrow:hover .carousel-arrow-oval {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+.carousel-arrow:hover .carousel-arrow-icon {
+    color: #FFD700;
+}
+
+/* Swiper Wrapper - Contains all slides */
+.swiper-wrapper.first-swiper-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
     align-items: center;
     justify-content: center;
 }
 
-.slide {
+/* Individual Swiper Slides */
+.swiper-slide {
     position: absolute;
-    width: 350px;
-    height: 500px;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 300px;
+    height: 450px;
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -225px;
+    transform-origin: center center;
+}
+
+.swiper-slide-active {
+    z-index: 3;
+}
+
+/* Enhanced transition for smooth scaling and filtering */
+.swiper-slide {
+    transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.8s ease,
+                filter 0.8s ease,
+                z-index 0s;
+}
+
+.slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Center slide - colored and full size */
-.slide.center {
-    transform: translateX(0) scale(1);
-    z-index: 3;
-    filter: grayscale(0%) brightness(1);
-    opacity: 1;
-}
-
-/* Left slide - grayscale and smaller */
-.slide.left {
-    transform: translateX(-200px) scale(0.8);
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 25px 25px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     z-index: 2;
-    filter: grayscale(100%) brightness(0.7);
-    opacity: 0.6;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Right slide - grayscale and smaller */
-.slide.right {
-    transform: translateX(200px) scale(0.8);
-    z-index: 2;
-    filter: grayscale(100%) brightness(0.7);
-    opacity: 0.6;
+.location {
+    margin-bottom: 8px;
 }
 
-.slide img {
+.text-f-13 {
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.all-caps {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.light-grey-font {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.heading-2 {
+    color: #FFFFFF;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.slide-divider {
+    width: 30px;
+    height: 2px;
+    background: #FFD700;
+    border-radius: 1px;
+}
+
+.slide-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.slide-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+/* Remove the old scaling effects since they're now handled inline */
+/* .swiper-slide:not(.swiper-slide-active) {
+    filter: grayscale(60%) brightness(0.7);
+    transform: scale(0.85);
+}
+
+.swiper-slide.swiper-slide-active {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1);
+} */
+
+/* Enhanced slide content visibility for active slides */
+.swiper-slide-active .slide-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.swiper-slide:not(.swiper-slide-active) .slide-content {
+    opacity: 0.8;
+    transform: translateY(10px);
+}
+
+/* Background gradient */
+.gradient-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(255, 215, 0, 0.08) 0%, 
+        rgba(255, 165, 0, 0.05) 30%, 
+        transparent 70%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .slide-caption {
@@ -138,19 +323,7 @@
     opacity: 1;
 }
 
-/* Navigation Buttons */
-.navigation {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    padding: 0 50px;
-    pointer-events: none;
-    z-index: 10;
-}
-
+/* Navigation Buttons - Legacy Support */
 .nav-btn {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(20px);
@@ -182,8 +355,8 @@
     line-height: 1;
 }
 
-/* Slide Indicators */
-.slide-indicators {
+/* Swiper Pagination */
+.swiper-pagination {
     position: absolute;
     bottom: 30px;
     left: 50%;
@@ -193,7 +366,7 @@
     z-index: 10;
 }
 
-.indicator {
+.swiper-pagination-bullet {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -203,13 +376,33 @@
     transition: all 0.3s ease;
 }
 
-.indicator.active {
+.swiper-pagination-bullet-active {
     background: #FFD700;
     transform: scale(1.2);
 }
 
-.indicator:hover {
+.swiper-pagination-bullet:hover {
     background: rgba(255, 215, 0, 0.6);
+}
+
+/* Hidden Default Swiper Navigation */
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    z-index: 10;
+    display: none !important;
+}
+
+/* Swiper Notification for Accessibility */
+.swiper-notification {
+    position: absolute;
+    z-index: -1000;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    opacity: 0;
+    overflow: hidden;
+    font-size: 0;
 }
 
 /* Play/Pause Indicator */
@@ -229,97 +422,139 @@
 
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
-    .photo-slider-container {
-        max-width: 900px;
+    .slider {
+        padding: 0 60px;
+    }
+    
+    .swiper.first-swiper {
         height: 500px;
     }
     
-    .slide {
-        width: 300px;
-        height: 400px;
+    .swiper-slide {
+        width: 260px;
+        height: 380px;
+        margin-left: -130px;
+        margin-top: -190px;
     }
     
-    .slide.left {
-        transform: translateX(-160px) scale(0.8);
+    .carousel-arrows {
+        padding: 0 20px;
     }
     
-    .slide.right {
-        transform: translateX(160px) scale(0.8);
+    .heading {
+        font-size: 3rem;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .photo-slider-container {
-        max-width: 700px;
+    .slider {
+        padding: 0 40px;
+    }
+    
+    .swiper.first-swiper {
         height: 400px;
     }
     
-    .slide {
-        width: 250px;
-        height: 350px;
+    .swiper-slide {
+        width: 220px;
+        height: 320px;
+        margin-left: -110px;
+        margin-top: -160px;
     }
     
-    .slide.left {
-        transform: translateX(-120px) scale(0.75);
+    .carousel-arrows {
+        padding: 0 10px;
     }
     
-    .slide.right {
-        transform: translateX(120px) scale(0.75);
+    .carousel-arrow {
+        width: 50px;
+        height: 50px;
     }
     
-    .navigation {
-        padding: 0 20px;
+    .carousel-arrow-oval {
+        width: 50px;
+        height: 50px;
     }
     
-    .nav-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
+    .carousel-arrow-icon {
+        font-size: 20px;
+    }
+    
+    .heading {
+        font-size: 2.5rem;
+    }
+    
+    .text-f-14 {
+        font-size: 0.8rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .photo-slider-container {
-        max-width: 100%;
-        height: 300px;
+    .slider {
+        padding: 0 20px;
     }
     
-    .slide {
-        width: 200px;
+    .swiper.first-swiper {
+        height: 350px;
+    }
+    
+    .swiper-slide {
+        width: 180px;
         height: 280px;
+        margin-left: -90px;
+        margin-top: -140px;
     }
     
-    .slide.left {
-        transform: translateX(-80px) scale(0.7);
+    .carousel-arrows {
+        padding: 0 5px;
     }
     
-    .slide.right {
-        transform: translateX(80px) scale(0.7);
+    .carousel-arrow {
+        width: 40px;
+        height: 40px;
     }
     
-    .slide-caption {
+    .carousel-arrow-oval {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-arrow-icon {
+        font-size: 18px;
+    }
+    
+    .slide-content {
         padding: 20px 15px 15px;
-        font-size: 0.9em;
     }
     
-    .navigation {
-        padding: 0 10px;
+    .heading-2 {
+        font-size: 1.3rem;
     }
     
-    .nav-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
+    .text-f-13 {
+        font-size: 0.7rem;
     }
     
-    .indicator {
+    .swiper-pagination-bullet {
         width: 8px;
         height: 8px;
     }
     
-    .slide-indicators {
+    .swiper-pagination {
         gap: 8px;
         bottom: 20px;
+    }
+    
+    .heading {
+        font-size: 2rem;
+    }
+    
+    .text-f-14-w {
+        margin-bottom: 20px;
+    }
+    
+    .divider {
+        width: 30px;
     }
 }
 
@@ -335,17 +570,17 @@
     }
 }
 
-.slide.active {
+.swiper-slide.active {
     animation: slideIn 0.6s ease-out;
 }
 
 /* Infinite scroll performance optimization */
-.slider {
+.swiper-wrapper {
     backface-visibility: hidden;
     perspective: 1000px;
 }
 
-.slide {
+.swiper-slide {
     backface-visibility: hidden;
 }
 

@@ -1,61 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Footer.css';
 
 const Footer = () => {
+    const [activeSection, setActiveSection] = useState('All');
+
+    const footerSections = [
+        {
+            id: 1,
+            title: "Quick Links",
+            category: "Navigation",
+            links: [
+                { name: "Home", href: "#home" },
+                { name: "About Us", href: "#about" },
+                { name: "What We Do", href: "#what-we-do" },
+                { name: "Publications", href: "#publications" },
+                { name: "Events", href: "#events" }
+            ]
+        },
+        {
+            id: 2,
+            title: "Publications",
+            category: "Resources",
+            links: [
+                { name: "Research Articles", href: "#articles" },
+                { name: "Books & Manuscripts", href: "#books" },
+                { name: "Conference Papers", href: "#papers" },
+                { name: "Digital Archives", href: "#archives" }
+            ]
+        },
+        {
+            id: 3,
+            title: "Get Involved",
+            category: "Community",
+            links: [
+                { name: "Become a Member", href: "#membership", cta: true },
+                { name: "Donate Now", href: "#donate", cta: true },
+                { name: "Volunteer", href: "#volunteer" },
+                { name: "Newsletter", href: "#newsletter" }
+            ]
+        }
+    ];
+
+    const categories = ["All", "Navigation", "Resources", "Community"];
+
+    const filteredSections = activeSection === 'All' 
+        ? footerSections 
+        : footerSections.filter(section => section.category === activeSection);
+
+    const handleCategoryFilter = (category) => {
+        setActiveSection(category);
+    };
+
     return (
         <footer className="footer">
             <div className="footer-content">
-                <div className="footer-top">
-                    <div className="footer-section footer-logo-section">
+                <div className="footer-header">
+                    <div className="footer-logo-section">
                         <img src="/logo_b.png" alt="The Indic Belt Society Logo" className="footer-logo" />
                         <h3>The Indic Belt Society</h3>
-                        <p>Promoting cultural heritage and academic excellence across the Indic Belt region.</p>
-                    </div>
-                    
-                    <div className="footer-section">
-                        <h4>Quick Links</h4>
-                        <ul className="footer-links">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#publications">Publications</a></li>
-                            <li><a href="#events">Events</a></li>
-                            <li><a href="#journals">Journals</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div className="footer-section">
-                        <h4>Publications</h4>
-                        <ul className="footer-links">
-                            <li><a href="#articles">Articles</a></li>
-                            <li><a href="#books">Books</a></li>
-                            <li><a href="#seminar-reports">Seminar Reports</a></li>
-                            <li><a href="#research-papers">Research Papers</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div className="footer-section">
-                        <h4>Get Involved</h4>
-                        <ul className="footer-links">
-                            <li><a href="#membership" className="cta-link">Become a Member</a></li>
-                            <li><a href="#donate" className="cta-link">Donate Now</a></li>
-                            <li><a href="#volunteer">Volunteer</a></li>
-                            <li><a href="#newsletter">Newsletter</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div className="footer-section">
-                        <h4>Contact Info</h4>
-                        <div className="contact-info">
-                            <p><i className="icon">📧</i> info@theindicbeltsociety.org</p>
-                            <p><i className="icon">📞</i> +91 XXX XXX XXXX</p>
-                            <p><i className="icon">📍</i> Address Line 1<br />City, State - Pincode</p>
-                        </div>
+                        <p>Promoting cultural heritage and academic excellence across the Indic Belt region through research, education, and community engagement.</p>
+                        
                         <div className="social-links">
                             <a href="#facebook" aria-label="Facebook">📘</a>
                             <a href="#twitter" aria-label="Twitter">🐦</a>
                             <a href="#linkedin" aria-label="LinkedIn">💼</a>
                             <a href="#youtube" aria-label="YouTube">📺</a>
                         </div>
+                    </div>
+                    
+                    <div className="contact-section">
+                        <h4>Contact Info</h4>
+                        <div className="contact-info">
+                            <p><i className="icon">📧</i> info@theindicbeltsociety.org</p>
+                            <p><i className="icon">📞</i> +91 XXX XXX XXXX</p>
+                            <p><i className="icon">📍</i> Address Line 1<br />City, State - Pincode</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="footer-sections">
+                    <div className="section-header">
+                        <h4>Explore Our Resources</h4>
+                        <div className="category-filters">
+                            {categories.map(category => (
+                                <button 
+                                    key={category} 
+                                    className={`filter-btn ${activeSection === category ? 'active' : ''}`}
+                                    onClick={() => handleCategoryFilter(category)}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="footer-sections-grid">
+                        {filteredSections.map((section) => (
+                            <div key={section.id} className="footer-section-card">
+                                <div className="section-meta">
+                                    <span className="section-category">{section.category}</span>
+                                </div>
+                                <h4 className="section-title">{section.title}</h4>
+                                <ul className="footer-links">
+                                    {section.links.map((link, index) => (
+                                        <li key={index}>
+                                            <a 
+                                                href={link.href} 
+                                                className={link.cta ? 'cta-link' : ''}
+                                            >
+                                                {link.name}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 

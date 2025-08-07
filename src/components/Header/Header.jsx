@@ -26,6 +26,8 @@ const Header = () => {
                             </div>
                         </li>
                         
+                        <li className="nav-item"><a href="#podcast">Podcast</a></li>
+
                         {/* Events Dropdown */}
                         <li className="nav-item dropdown">
                             <a href="#events" className="dropbtn">
@@ -36,9 +38,9 @@ const Header = () => {
                                 <a href="#event-reports">Event Reports</a>
                             </div>
                         </li>
-                        
-                        <li className="nav-item"><a href="#gallery">Gallery</a></li>
-                        <li className="nav-item"><a href="#contact">Contact</a></li>
+                        <li className="nav-item"><a href="#journals">Journals</a></li>
+                        <li className="nav-item"><a href="#sea.theindicbeltsociety">Sea at a Glance</a></li>
+                        <li className="nav-item"><a href="#contact">Contact Us</a></li>
                     </ul>
                 </nav>
             </div>

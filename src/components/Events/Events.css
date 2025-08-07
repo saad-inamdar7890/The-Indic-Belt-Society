@@ -1,6 +1,12 @@
 .events-section {
     padding: 80px 0;
-    background-color: #F8F9FA; /* Light grey background */
+    background-color: #F8F9FA; /* Light grey background for subtle depth */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .section-header {
@@ -10,134 +16,211 @@
 
 .section-header h2 {
     font-size: 2.5em;
-    color: #1A2C5B; /* Deep blue for headings */
-    margin-bottom: 15px;
+    color: #1A2C5B; /* Deep blue for primary headings */
+    margin-bottom: 30px;
     font-weight: bold;
 }
 
-.section-header p {
-    font-size: 1.2em;
-    color: #6C757D; /* Medium grey for body text */
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.6;
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    background-color: #FFFFFF;
+    color: #6C757D;
+    border: 2px solid #F8F9FA;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #1A2C5B;
+    color: #FFFFFF;
+    border-color: #1A2C5B;
+    transform: translateY(-2px);
 }
 
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 30px;
     margin-bottom: 50px;
 }
 
 .event-card {
-    background-color: #FFFFFF; /* White card background */
+    background-color: #FFFFFF; /* White card backgrounds */
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    display: flex;
-    flex-direction: row;
-    border: 1px solid #F8F9FA;
+    border: 1px solid #F8F9FA; /* Light grey borders */
 }
 
 .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-.event-date {
-    background-color: #1A2C5B; /* Deep blue background */
-    color: #FFFFFF;
-    padding: 20px;
+.event-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1A2C5B, #2A3F6B);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    text-align: center;
 }
 
-.event-day {
-    font-size: 2.5em;
-    font-weight: bold;
-    line-height: 1;
-    color: #FFD700; /* Yellow for dates */
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.event-month {
-    font-size: 0.9em;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-top: 5px;
-}
-
-.event-content {
-    padding: 25px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.event-card:hover .event-image img {
+    transform: scale(1.05);
 }
 
 .event-type {
+    position: absolute;
+    top: 15px;
+    right: 15px;
     background-color: #FFD700; /* Yellow accent */
     color: #1A2C5B;
-    padding: 4px 12px;
+    padding: 6px 12px;
     border-radius: 15px;
     font-size: 0.8em;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    align-self: flex-start;
-    margin-bottom: 15px;
+    z-index: 2;
 }
 
-.event-title {
-    font-size: 1.4em;
-    color: #1A2C5B; /* Deep blue for titles */
-    margin-bottom: 12px;
+.event-date-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(26, 44, 91, 0.9);
+    color: #FFFFFF;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+}
+
+.event-day {
+    display: block;
+    font-size: 1.8em;
     font-weight: bold;
-    line-height: 1.3;
+    line-height: 1;
+    margin-bottom: 2px;
 }
 
-.event-description {
-    color: #6C757D; /* Medium grey for descriptions */
-    line-height: 1.6;
-    margin-bottom: 15px;
-    flex-grow: 1;
+.event-month {
+    display: block;
+    font-size: 0.7em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
+.event-content {
+    padding: 25px;
 }
 
 .event-meta {
-    margin-bottom: 20px;
-}
-
-.event-location,
-.event-full-date {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
     font-size: 0.9em;
-    color: #6C757D;
-    margin-bottom: 5px;
 }
 
-.event-cta {
-    background-color: #FFD700; /* Yellow CTA button */
+.event-category {
+    background-color: rgba(26, 44, 91, 0.1);
     color: #1A2C5B;
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+.event-time {
+    color: #6C757D; /* Medium grey for time */
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.event-title {
+    font-size: 1.3em;
+    color: #1A2C5B; /* Deep blue for titles */
+    margin-bottom: 12px;
+    font-weight: bold;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.event-location {
+    color: #FFD700; /* Yellow for highlighting location */
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 0.95em;
+}
+
+.event-description {
+    color: #6C757D; /* Medium grey for body text */
+    line-height: 1.6;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #F8F9FA;
+}
+
+.event-full-date {
+    color: #6C757D;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.event-link {
+    color: #1A2C5B; /* Deep blue for links */
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.9em;
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    align-self: flex-start;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background-color: rgba(26, 44, 91, 0.05);
 }
 
-.event-cta:hover {
-    background-color: #FDCB6E;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+.event-link:hover {
+    color: #FFD700; /* Yellow accent on hover */
+    background-color: #1A2C5B;
+    transform: translateX(5px);
 }
 
 .events-footer {
@@ -164,18 +247,30 @@
 }
 
 /* Responsive Design */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .events-section {
         padding: 60px 0;
     }
     
+    .events-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .section-header h2 {
         font-size: 2em;
     }
     
-    .section-header p {
-        font-size: 1.1em;
+    .category-filters {
+        gap: 10px;
         padding: 0 20px;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 13px;
     }
     
     .events-grid {
@@ -184,33 +279,29 @@
     }
     
     .event-card {
-        flex-direction: column;
-    }
-    
-    .event-date {
-        flex-direction: row;
-        justify-content: center;
-        gap: 15px;
-        padding: 15px 20px;
-        min-width: auto;
-    }
-    
-    .event-day {
-        font-size: 2em;
-    }
-    
-    .event-month {
-        font-size: 1em;
-        margin-top: 0;
-        align-self: center;
+        margin: 0 10px;
     }
     
     .event-content {
         padding: 20px;
     }
+    
+    .event-title {
+        font-size: 1.2em;
+    }
+    
+    .event-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
 }
 
 @media screen and (max-width: 480px) {
+    .events-section {
+        padding: 50px 0;
+    }
+    
     .section-header {
         margin-bottom: 40px;
     }
@@ -219,12 +310,37 @@
         font-size: 1.8em;
     }
     
-    .event-title {
-        font-size: 1.2em;
+    .category-filters {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        width: 200px;
+        text-align: center;
+    }
+    
+    .event-image {
+        height: 150px;
     }
     
     .event-content {
         padding: 15px;
+    }
+    
+    .event-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .event-date-overlay {
+        padding: 10px;
+    }
+    
+    .event-day {
+        font-size: 1.5em;
     }
     
     .cta-button {

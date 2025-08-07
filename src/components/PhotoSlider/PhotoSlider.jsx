@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PhotoSlider.css';
 
 const PhotoSlider = () => {
@@ -7,34 +7,61 @@ const PhotoSlider = () => {
             id: 1, 
             src: 'p1.jpg', 
             alt: 'Cultural Heritage Event',
-            caption: 'Annual Cultural Heritage Conference 2024'
+            caption: 'Annual Cultural Heritage Conference 2024',
+            location: 'New Delhi'
         },
         { 
             id: 2, 
             src: 'p2.jpg', 
             alt: 'Academic Research Symposium',
-            caption: 'International Research Symposium on Indic Studies'
+            caption: 'International Research Symposium',
+            location: 'Mumbai'
         },
         { 
             id: 3, 
             src: 'p3.jpg', 
             alt: 'Community Outreach Program',
-            caption: 'Community Engagement and Educational Outreach'
+            caption: 'Community Engagement Program',
+            location: 'Bangalore'
         },
         { 
             id: 4, 
             src: 'p4.jpg', 
-            alt: 'Community Outreach Program',
-            caption: 'Community Engagement and Educational Outreach'
-        },        { 
+            alt: 'Educational Workshop',
+            caption: 'Educational Workshop Series',
+            location: 'Chennai'
+        },        
+        { 
             id: 5, 
             src: 'p5.jpg', 
-            alt: 'Community Outreach Program',
-            caption: 'Community Engagement and Educational Outreach'
+            alt: 'Cultural Festival',
+            caption: 'Annual Cultural Festival',
+            location: 'Kolkata'
+        },
+        { 
+            id: 6, 
+            src: 'p1.jpg', 
+            alt: 'Research Conference',
+            caption: 'Research Conference 2024',
+            location: 'Pune'
+        },
+        { 
+            id: 7, 
+            src: 'p2.jpg', 
+            alt: 'Heritage Seminar',
+            caption: 'Heritage Preservation Seminar',
+            location: 'Hyderabad'
+        },
+        { 
+            id: 8, 
+            src: 'p3.jpg', 
+            alt: 'Academic Summit',
+            caption: 'Academic Excellence Summit',
+            location: 'Ahmedabad'
         },
     ];
 
-    const [currentSlide, setCurrentSlide] = useState(0); // Start from 0
+    const [currentSlide, setCurrentSlide] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
 
     const nextSlide = () => {
@@ -54,7 +81,7 @@ const PhotoSlider = () => {
         if (!isPaused) {
             const interval = setInterval(() => {
                 nextSlide();
-            }, 3000); // Change slide every 3 seconds
+            }, 4000);
             return () => clearInterval(interval);
         }
     }, [isPaused]);
@@ -62,81 +89,101 @@ const PhotoSlider = () => {
     const handleMouseEnter = () => setIsPaused(true);
     const handleMouseLeave = () => setIsPaused(false);
 
-    // Get visible slides (3 at a time: previous, current, next)
-    const getVisibleSlides = () => {
-        const slides = [];
-        for (let i = -1; i <= 1; i++) {
-            const index = (currentSlide + i + photos.length) % photos.length;
-            slides.push({
-                ...photos[index],
-                position: i, // -1 (left), 0 (center), 1 (right)
-                originalIndex: index
-            });
-        }
-        return slides;
-    };
-
     return (
         <section className="photo-slider-section">
             <div className="container-wrapper">
                 <div className="section-header">
-                    <h2>Gallery</h2>
-                    <p>Capturing moments from our events, conferences, and community initiatives</p>
+                    <div className="text-f-14-w">
+                        <div className="divider"></div>
+                        <div className="text-f-14">explore our journey</div>
+                        <div className="divider left-margin"></div>
+                    </div>
+                    <h1 className="heading">Gallery</h1>
                 </div>
                 
-                <div 
-                    className="photo-slider-container"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
-                    <div className="slider">
-                        {getVisibleSlides().map((slide) => {
-                            const isCenter = slide.position === 0;
-                            const isLeft = slide.position === -1;
-                            const isRight = slide.position === 1;
-                            
-                            return (
+                <div className="slider">
+                    <div 
+                        className="swiper first-swiper"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <div className="swiper-wrapper first-swiper-wrapper">
+                            {photos.map((photo, index) => {
+                                const isActive = index === currentSlide;
+                                const distance = Math.abs(index - currentSlide);
+                                const scale = isActive ? 1 : 0.8; // Active slide full size, others 80%
+                                const opacity = distance > 3 ? 0 : (isActive ? 1 : 0.75);
+                                const translateX = (index - currentSlide) * 280; // Reduced spacing for better scaling effect
+                                
+                                return (
                                 <div 
-                                    key={`${slide.id}-${slide.position}`} 
-                                    className={`slide ${isCenter ? 'center' : ''} ${isLeft ? 'left' : ''} ${isRight ? 'right' : ''}`}
+                                    key={photo.id} 
+                                    className={`swiper-slide ${isActive ? 'swiper-slide-active' : ''}`}
+                                    style={{ 
+                                        transform: `translateX(${translateX}px) scale(${scale})`,
+                                        opacity: opacity,
+                                        zIndex: isActive ? 3 : (distance > 2 ? 1 : 2),
+                                        filter: isActive ? 'grayscale(0%) brightness(1)' : 'grayscale(60%) brightness(0.8)'
+                                    }}
                                 >
-                                    <img src={slide.src} alt={slide.alt} />
-                                    {isCenter && (
-                                        <div className="slide-caption">
-                                            {slide.caption}
+                                    <div className="slide">
+                                        <div className="slide-content">
+                                            <div className="location">
+                                                <div className="text-f-13 all-caps light-grey-font">{photo.location}</div>
+                                            </div>
+                                            <h2 className="heading-2">{photo.caption}</h2>
+                                            <div className="slide-divider"></div>
                                         </div>
-                                    )}
+                                        <div className="slide-img-overlay"></div>
+                                        <img src={photo.src} alt={photo.alt} className="slide-img" />
+                                    </div>
                                 </div>
-                            );
-                        })}
-                    </div>
-                    
-                    {/* Navigation Arrows */}
-                    <div className="navigation">
-                        <button className="nav-btn prev" onClick={prevSlide} aria-label="Previous slide">
-                            <span>‹</span>
-                        </button>
-                        <button className="nav-btn next" onClick={nextSlide} aria-label="Next slide">
-                            <span>›</span>
-                        </button>
-                    </div>
-                    
-                    {/* Slide Indicators */}
-                    <div className="slide-indicators">
-                        {photos.map((_, index) => (
-                            <button
-                                key={index}
-                                className={`indicator ${index === currentSlide ? 'active' : ''}`}
-                                onClick={() => goToSlide(index)}
-                                aria-label={`Go to slide ${index + 1}`}
-                            />
-                        ))}
-                    </div>
+                                );
+                            })}
+                        </div>
 
-                    {/* Play/Pause indicator */}
-                    <div className="play-pause-indicator">
-                        {isPaused ? '▶️' : '⏸️'}
+                        {/* Carousel Arrows Container */}
+                        <div className="carousel-arrows">
+                            <div className="carousel-arrow-w arrow-previous">
+                                <div className="carousel-arrow" onClick={prevSlide}>
+                                    <div className="carousel-arrow-icon">‹</div>
+                                    <div className="carousel-arrow-oval"></div>
+                                </div>
+                            </div>
+                            <div className="carousel-arrow-w arrow-next">
+                                <div className="carousel-arrow arrow-next" onClick={nextSlide}>
+                                    <div className="carousel-arrow-icon">›</div>
+                                    <div className="carousel-arrow-oval next-arrow"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Hidden Default Navigation (as per Swiper structure) */}
+                        <div className="swiper-button-prev" style={{ display: 'none' }}></div>
+                        <div className="swiper-button-next" style={{ display: 'none' }}></div>
+
+                        {/* Swiper Pagination */}
+                        <div className="swiper-pagination">
+                            {photos.map((_, index) => (
+                                <div
+                                    key={index}
+                                    className={`swiper-pagination-bullet ${index === currentSlide ? 'swiper-pagination-bullet-active' : ''}`}
+                                    onClick={() => goToSlide(index)}
+                                />
+                            ))}
+                        </div>
+
+                        {/* Swiper Notification for Accessibility */}
+                        <span className="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+
+                        {/* Play/Pause indicator */}
+                        {/* <div className="play-pause-indicator">
+                            {isPaused ? '▶️' : '⏸️'}
+                        </div> */}
                     </div>
+                    
+                    {/* Background gradient similar to the original */}
+                    
                 </div>
             </div>
         </section>
