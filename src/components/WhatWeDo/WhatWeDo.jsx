@@ -95,7 +95,6 @@ const WhatWeDo = () => {
                             <div className="area-image">
                                 <img src={area.image} alt={area.title} />
                                 <div className="area-type">{area.type}</div>
-                                <div className="area-icon">{area.icon}</div>
                             </div>
                             <div className="area-content">
                                 <div className="area-meta">
